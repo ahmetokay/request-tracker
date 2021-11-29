@@ -1,13 +1,14 @@
 ---DELETE TABLE---
-DROP TABLE IF EXISTS "rt_workspace";
-DROP TABLE IF EXISTS "rt_user";
-DROP TABLE IF EXISTS "rt_user_role";
-DROP TABLE IF EXISTS "rt_role";
-DROP TABLE IF EXISTS "rt_request";
-DROP TABLE IF EXISTS "rt_request_type";
-DROP TABLE IF EXISTS "rt_workspace_request";
-DROP TABLE IF EXISTS "rt_scheduled_type";
+DROP TABLE IF EXISTS "rt_request_history";
 DROP TABLE IF EXISTS "rt_response_type";
+DROP TABLE IF EXISTS "rt_workspace_request";
+DROP TABLE IF EXISTS "rt_workspace";
+DROP TABLE IF EXISTS "rt_request";
+DROP TABLE IF EXISTS "rt_scheduled_type";
+DROP TABLE IF EXISTS "rt_request_type";
+DROP TABLE IF EXISTS "rt_user_role";
+DROP TABLE IF EXISTS "rt_user";
+DROP TABLE IF EXISTS "rt_role";
 
 ---CREATE TABLE---
 CREATE TABLE "rt_response_type"
@@ -16,7 +17,7 @@ CREATE TABLE "rt_response_type"
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
-    "updated_by" bigint(100),
+    "updated_by" bigint,
     "name"       varchar(255) NOT NULL,
     CONSTRAINT "rt_response_type_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -127,7 +128,7 @@ CREATE TABLE "rt_request"
     "created"              DATE,
     "created_by"           bigint,
     "updated"              DATE,
-    "updated_by"           bigint(100),
+    "updated_by"           bigint,
     "fk_request_type_id"   bigint       NOT NULL,
     "fk_scheduled_type_id" bigint       NOT NULL,
     "url"                  varchar(255) NOT NULL,
@@ -175,7 +176,7 @@ CREATE TABLE "rt_request_history"
     "created"             DATE,
     "created_by"          bigint,
     "updated"             DATE,
-    "updated_by"          bigint(100),
+    "updated_by"          bigint,
     "fk_request_id"       bigint NOT NULL,
     "fk_response_type_id" bigint NOT NULL,
     "request_date"        DATE   NOT NULL,
@@ -235,13 +236,3 @@ INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_use
 --     ADD CONSTRAINT "rt_scheduled_type_fk0" FOREIGN KEY ("created_by") REFERENCES "rt_user" ("id");
 -- ALTER TABLE "rt_scheduled_type"
 --     ADD CONSTRAINT "rt_scheduled_type_fk1" FOREIGN KEY ("updated_by") REFERENCES "rt_user" ("id");
-
-
-
-
-
-
-
-
-
-

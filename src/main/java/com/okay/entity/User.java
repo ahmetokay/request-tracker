@@ -9,19 +9,18 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "RT_USER", schema = "PUBLIC")
+@Table(name = "RT_USER")
 public class User extends BaseEntity {
 
-    @Column(name = "EMAIL")
-    private String eMail;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "SURNAME")
+    @Column(name = "surname")
     private String surname;
-
 }

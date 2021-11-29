@@ -1,16 +1,14 @@
 server:
   port: 5055
 spring:
-  application:
-    name: request-tracker
   datasource:
     url: jdbc:postgresql://localhost:5432/request_tracker_db
-    username: request_tracker
-    password: request_tracker
+    username: postgres
+    password: postgres
     initialization-mode: always
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
+    show-sql: false
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
