@@ -1,16 +1,22 @@
 package com.okay.core;
 
-import java.io.Serializable;
+import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
 public abstract class BaseModel implements Serializable {
 
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    private Boolean active;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Date created;
+
+    private Integer createdBy;
+
+    private Date updated;
+
+    private Integer updatedBy;
 }

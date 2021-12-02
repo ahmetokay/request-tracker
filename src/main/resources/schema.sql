@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS "rt_role";
 CREATE TABLE "rt_response_type"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -27,6 +28,7 @@ CREATE TABLE "rt_response_type"
 CREATE TABLE "rt_scheduled_type"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -40,6 +42,7 @@ CREATE TABLE "rt_scheduled_type"
 CREATE TABLE "rt_request_type"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -53,6 +56,7 @@ CREATE TABLE "rt_request_type"
 CREATE TABLE "rt_role"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -66,6 +70,7 @@ CREATE TABLE "rt_role"
 CREATE TABLE "rt_user"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -83,6 +88,7 @@ CREATE TABLE "rt_user"
 CREATE TABLE "rt_user_role"
 (
     "id"         serial NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -106,6 +112,7 @@ ALTER TABLE "rt_user_role"
 CREATE TABLE "rt_workspace"
 (
     "id"         serial       NOT NULL,
+    "active"     boolean,
     "created"    DATE,
     "created_by" bigint,
     "updated"    DATE,
@@ -127,6 +134,7 @@ ALTER TABLE "rt_workspace"
 CREATE TABLE "rt_request"
 (
     "id"                   serial       NOT NULL,
+    "active"     boolean,
     "created"              DATE,
     "created_by"           bigint,
     "updated"              DATE,
@@ -153,6 +161,7 @@ ALTER TABLE "rt_request"
 CREATE TABLE "rt_request_history"
 (
     "id"                  serial NOT NULL,
+    "active"     boolean,
     "created"             DATE,
     "created_by"          bigint,
     "updated"             DATE,
@@ -175,49 +184,49 @@ ALTER TABLE "rt_request_history"
 
 
 ---INSERT TABLE---
-INSERT INTO "rt_role" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'ADMIN');
-INSERT INTO "rt_role" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'USER');
+INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'ADMIN');
+INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'USER');
 
 
-INSERT INTO "rt_user" (id, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'ahmet@ahmet.com', '123456', 'Ahmet', 'Okay');
-INSERT INTO "rt_user" (id, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '123456', 'Turkuaz', 'Şengül');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'ahmet@ahmet.com', '123456', 'Ahmet', 'Okay');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '123456', 'Turkuaz', 'Şengül');
 
-INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1);
-INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 2);
-INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 2, 1);
-INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 2, 2);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 2);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 2, 1);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 2, 2);
 
-INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'POST');
-INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'GET');
-INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'PUT');
-INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'UPDATE');
+INSERT INTO "rt_request_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'POST');
+INSERT INTO "rt_request_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'GET');
+INSERT INTO "rt_request_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'PUT');
+INSERT INTO "rt_request_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'UPDATE');
 
-INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '200');
-INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '404');
+INSERT INTO "rt_response_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, '200');
+INSERT INTO "rt_response_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, '404');
 
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN1');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN15');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN30');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN60');
+INSERT INTO "rt_scheduled_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'MIN1');
+INSERT INTO "rt_scheduled_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'MIN15');
+INSERT INTO "rt_scheduled_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'MIN30');
+INSERT INTO "rt_scheduled_type" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 'MIN60');
 
-INSERT INTO "rt_workspace" (id, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 'Test Workspace');
+INSERT INTO "rt_workspace" (id, active, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 'Test Workspace');
 
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN1', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN60', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN1', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, active, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, 'MIN60', '127.0.0.1', '5055');
 
 
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
-INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, active, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, true, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
 
 
 -- ALTER TABLE "rt_user"
