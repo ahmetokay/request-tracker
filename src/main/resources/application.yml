@@ -2,12 +2,22 @@ server:
   port: 5055
   servlet:
     context-path: /request-tracker
+    application-display-name: request-tracker
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     url: jdbc:postgresql://localhost:5432/request_tracker_db
     username: postgres
     password: postgres
     initialization-mode: always
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      pool-name: RequestTracker
+      max-lifetime: 1500000
+      connection-timeout: 1200000
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false

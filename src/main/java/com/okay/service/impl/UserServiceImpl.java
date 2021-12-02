@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto findByUsername(String username) {
+        return converter.convertToDto(repository.findByEmail(username));
+    }
+
+    @Override
     public UserDto save(UserDto user) {
         return converter.convertToDto(repository.save(converter.convertToEntity(user)));
     }

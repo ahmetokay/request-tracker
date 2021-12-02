@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS "rt_user_role";
 DROP TABLE IF EXISTS "rt_user";
 DROP TABLE IF EXISTS "rt_role";
 
+
 ---CREATE TABLE---
 CREATE TABLE "rt_response_type"
 (
@@ -194,17 +195,21 @@ INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, nam
 INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '200');
 INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '404');
 
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '1_MIN');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '15_MIN');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '30_MIN');
-INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '60_MIN');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN1');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN15');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN30');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'MIN60');
 
 INSERT INTO "rt_workspace" (id, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 'Test Workspace');
 
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN1', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN15', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN30', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 'MIN60', '127.0.0.1', '5055');
 
 
 INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);

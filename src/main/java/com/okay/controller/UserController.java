@@ -5,6 +5,7 @@ import com.okay.model.WorkspaceDto;
 import com.okay.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class UserController {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
+//    @PreAuthorize("ROLE_TEST")
     @GetMapping(value = "/list")
     public ResponseEntity<List<UserDto>> list() {
         return new ResponseEntity<>(service.list(), HttpStatus.OK);

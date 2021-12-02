@@ -2,7 +2,6 @@ package com.okay.controller;
 
 import com.okay.model.RequestTypeDto;
 import com.okay.model.ResponseTypeDto;
-import com.okay.model.ScheduledTypeDto;
 import com.okay.service.ParameterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +19,6 @@ public class ParameterController {
 
     public ParameterController(ParameterService service) {
         this.service = service;
-    }
-
-    @GetMapping(value = "/scheduled-type")
-    public ResponseEntity<List<ScheduledTypeDto>> scheduledTypeList() {
-        return new ResponseEntity<>(service.scheduledTypeList(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/request-type")

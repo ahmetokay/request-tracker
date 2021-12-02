@@ -1,6 +1,7 @@
 package com.okay.model;
 
 import com.okay.core.BaseModel;
+import com.okay.enm.EnumScheduledType;
 import lombok.Data;
 
 @Data
@@ -10,7 +11,7 @@ public class RequestDto extends BaseModel {
 
     private RequestTypeDto requestType;
 
-    private ScheduledTypeDto scheduledType;
+    private EnumScheduledType scheduledType;
 
     private String url;
 

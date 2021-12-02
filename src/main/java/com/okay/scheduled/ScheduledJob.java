@@ -24,7 +24,7 @@ public class ScheduledJob {
     //    @Scheduled(cron = "0 */1 * * * ?")
     @Scheduled(cron = "0 * * * * ?")
     public void perform() throws Exception {
-        List<RequestDto> list = requestService.filter(EnumScheduledType.MIN_15);
+        List<RequestDto> list = requestService.filter(EnumScheduledType.MIN15);
         LOGGER.info(list.toString());
     }
 }

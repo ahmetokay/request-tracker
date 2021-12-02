@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserService {
 
+    UserDto findByUsername(String username);
+
     UserDto save(UserDto user);
 
     UserDto update(UserDto user);
