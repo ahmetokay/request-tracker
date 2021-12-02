@@ -12,29 +12,29 @@ import java.util.List;
 @RequestMapping("/workspace")
 public class WorkspaceController {
 
-    private WorkspaceService workspaceService;
+    private WorkspaceService service;
 
-    public WorkspaceController(WorkspaceService workspaceService) {
-        this.workspaceService = workspaceService;
+    public WorkspaceController(WorkspaceService service) {
+        this.service = service;
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<WorkspaceDto> save(@RequestBody WorkspaceDto workspace) {
-        return new ResponseEntity<>(workspaceService.save(workspace), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(workspace), HttpStatus.OK);
     }
 
     @PostMapping(value = "/update")
     public ResponseEntity<WorkspaceDto> update(@RequestBody WorkspaceDto workspace) {
-        return new ResponseEntity<>(workspaceService.update(workspace), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(workspace), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/{workspaceId}")
-    public ResponseEntity<WorkspaceDto> get(@PathVariable("workspaceId") long workspaceId) {
-        return new ResponseEntity<>(workspaceService.get(workspaceId), HttpStatus.OK);
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<WorkspaceDto> get(@PathVariable("id") long id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<WorkspaceDto>> list() {
-        return new ResponseEntity<>(workspaceService.list(), HttpStatus.OK);
+        return new ResponseEntity<>(service.list(), HttpStatus.OK);
     }
 }

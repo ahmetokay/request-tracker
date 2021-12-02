@@ -1,13 +1,11 @@
 package com.okay.controller;
 
 import com.okay.model.UserDto;
+import com.okay.model.WorkspaceDto;
 import com.okay.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,20 +14,29 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private UserService service;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService service) {
+        this.service = service;
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<UserDto> save(@RequestBody UserDto user) {
+        return new ResponseEntity<>(service.save(user), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<UserDto> update(@RequestBody UserDto user) {
+        return new ResponseEntity<>(service.update(user), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<UserDto> get(@PathVariable("id") long id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<UserDto>> list() {
-        return new ResponseEntity<>(userService.list(), HttpStatus.OK);
-    }
-
-    //    @PreAuthorize("test")
-    @GetMapping(value = "/get")
-    public ResponseEntity<UserDto> test1(@Valid @RequestParam(name = "userId") long userId) {
-        return new ResponseEntity<>(userService.get(userId), HttpStatus.OK);
+        return new ResponseEntity<>(service.list(), HttpStatus.OK);
     }
 }

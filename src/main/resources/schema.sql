@@ -132,7 +132,7 @@ CREATE TABLE "rt_request"
     "updated_by"           bigint,
     "fk_workspace_id"      bigint       NOT NULL,
     "fk_request_type_id"   bigint       NOT NULL,
-    "fk_scheduled_type_id" bigint       NOT NULL,
+    "scheduled_type"       varchar(50)  NOT NULL,
     "url"                  varchar(255) NOT NULL,
     "port"                 varchar(50),
     CONSTRAINT "rt_request_pk" PRIMARY KEY ("id")
@@ -147,8 +147,6 @@ ALTER TABLE "rt_request"
     ADD CONSTRAINT "rt_request_fk2" FOREIGN KEY ("fk_workspace_id") REFERENCES "rt_workspace" ("id");
 ALTER TABLE "rt_request"
     ADD CONSTRAINT "rt_request_fk3" FOREIGN KEY ("fk_request_type_id") REFERENCES "rt_request_type" ("id");
-ALTER TABLE "rt_request"
-    ADD CONSTRAINT "rt_request_fk4" FOREIGN KEY ("fk_scheduled_type_id") REFERENCES "rt_scheduled_type" ("id");
 
 
 CREATE TABLE "rt_request_history"
@@ -203,8 +201,18 @@ INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, n
 
 INSERT INTO "rt_workspace" (id, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 'Test Workspace');
 
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, fk_scheduled_type_id, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 1, '127.0.0.1', '5055');
-INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, fk_scheduled_type_id, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 2, '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, scheduled_type, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, '15MIN', '127.0.0.1', '5055');
+
+
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
+INSERT INTO "rt_request_history" (id, created, created_by, updated, updated_by, fk_request_id, fk_response_type_id, request_date) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, CURRENT_TIMESTAMP);
 
 
 -- ALTER TABLE "rt_user"

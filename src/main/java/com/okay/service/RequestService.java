@@ -1,5 +1,6 @@
 package com.okay.service;
 
+import com.okay.enm.EnumScheduledType;
 import com.okay.model.RequestDto;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface RequestService {
     RequestDto get(long id);
 
     List<RequestDto> list();
+
+    List<RequestDto> filter(EnumScheduledType requestType);
 }

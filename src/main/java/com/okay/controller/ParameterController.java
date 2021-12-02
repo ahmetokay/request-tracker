@@ -16,24 +16,24 @@ import java.util.List;
 @RequestMapping("/parameter")
 public class ParameterController {
 
-    private ParameterService parameterService;
+    private ParameterService service;
 
-    public ParameterController(ParameterService parameterService) {
-        this.parameterService = parameterService;
+    public ParameterController(ParameterService service) {
+        this.service = service;
     }
 
     @GetMapping(value = "/scheduled-type")
     public ResponseEntity<List<ScheduledTypeDto>> scheduledTypeList() {
-        return new ResponseEntity<>(parameterService.scheduledTypeList(), HttpStatus.OK);
+        return new ResponseEntity<>(service.scheduledTypeList(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/request-type")
     public ResponseEntity<List<RequestTypeDto>> requestTypeList() {
-        return new ResponseEntity<>(parameterService.requestTypeList(), HttpStatus.OK);
+        return new ResponseEntity<>(service.requestTypeList(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/response-type")
     public ResponseEntity<List<ResponseTypeDto>> responseTypeList() {
-        return new ResponseEntity<>(parameterService.responseTypeList(), HttpStatus.OK);
+        return new ResponseEntity<>(service.responseTypeList(), HttpStatus.OK);
     }
 }

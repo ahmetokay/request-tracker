@@ -1,6 +1,7 @@
 package com.okay.entity;
 
 import com.okay.core.BaseEntity;
+import com.okay.enm.EnumScheduledType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,9 +19,9 @@ public class Request extends BaseEntity {
     @JoinColumn(name = "fk_request_type_id")
     private RequestType requestType;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_scheduled_type_id")
-    private ScheduledType scheduledType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "scheduled_type")
+    private EnumScheduledType scheduledType;
 
     @Column(name = "url")
     private String url;

@@ -1,7 +1,6 @@
 package com.okay.service.impl;
 
 import com.okay.converter.WorkspaceConverter;
-import com.okay.entity.Workspace;
 import com.okay.model.WorkspaceDto;
 import com.okay.repository.WorkspaceRepository;
 import com.okay.service.WorkspaceService;
@@ -28,7 +27,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public WorkspaceDto update(WorkspaceDto workspace) {
-        return null;
+        return converter.convertToDto(repository.save(converter.convertToEntity(workspace)));
     }
 
     @Override

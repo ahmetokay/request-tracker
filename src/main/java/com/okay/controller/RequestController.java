@@ -12,29 +12,29 @@ import java.util.List;
 @RequestMapping("/request")
 public class RequestController {
 
-    private RequestService requestService;
+    private RequestService service;
 
-    public RequestController(RequestService requestService) {
-        this.requestService = requestService;
+    public RequestController(RequestService service) {
+        this.service = service;
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<RequestDto> save(@RequestBody RequestDto request) {
-        return new ResponseEntity<>(requestService.save(request), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(request), HttpStatus.OK);
     }
 
     @PostMapping(value = "/update")
     public ResponseEntity<RequestDto> update(@RequestBody RequestDto request) {
-        return new ResponseEntity<>(requestService.update(request), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(request), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/{requestId}")
-    public ResponseEntity<RequestDto> get(@PathVariable("requestId") long requestId) {
-        return new ResponseEntity<>(requestService.get(requestId), HttpStatus.OK);
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<RequestDto> get(@PathVariable("id") long id) {
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<RequestDto>> list() {
-        return new ResponseEntity<>(requestService.list(), HttpStatus.OK);
+        return new ResponseEntity<>(service.list(), HttpStatus.OK);
     }
 }

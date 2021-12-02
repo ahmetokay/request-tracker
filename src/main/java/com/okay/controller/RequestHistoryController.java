@@ -12,29 +12,34 @@ import java.util.List;
 @RequestMapping("/request-history")
 public class RequestHistoryController {
 
-    private RequestHistoryService requestHistoryService;
+    private RequestHistoryService service;
 
-    public RequestHistoryController(RequestHistoryService requestHistoryService) {
-        this.requestHistoryService = requestHistoryService;
+    public RequestHistoryController(RequestHistoryService service) {
+        this.service = service;
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<RequestHistoryDto> save(@RequestBody RequestHistoryDto requestHistory) {
-        return new ResponseEntity<>(requestHistoryService.save(requestHistory), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(requestHistory), HttpStatus.OK);
     }
 
     @PostMapping(value = "/update")
     public ResponseEntity<RequestHistoryDto> update(@RequestBody RequestHistoryDto requestHistory) {
-        return new ResponseEntity<>(requestHistoryService.update(requestHistory), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(requestHistory), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<RequestHistoryDto> get(@PathVariable("id") long id) {
-        return new ResponseEntity<>(requestHistoryService.get(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<RequestHistoryDto>> list() {
-        return new ResponseEntity<>(requestHistoryService.list(), HttpStatus.OK);
+        return new ResponseEntity<>(service.list(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/filter/{requestId}")
+    public ResponseEntity<List<RequestHistoryDto>> filter(@PathVariable("requestId") long requestId) {
+        return new ResponseEntity<>(service.filter(requestId), HttpStatus.OK);
     }
 }

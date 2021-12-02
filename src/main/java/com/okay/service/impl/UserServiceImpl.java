@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto save(UserDto user) {
-        return null;
+        return converter.convertToDto(repository.save(converter.convertToEntity(user)));
     }
 
     @Override
     public UserDto update(UserDto user) {
-        return null;
+        return converter.convertToDto(repository.save(converter.convertToEntity(user)));
     }
 
     @Override

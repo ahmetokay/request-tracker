@@ -21,13 +21,13 @@ public class RequestHistoryServiceImpl implements RequestHistoryService {
     }
 
     @Override
-    public RequestHistoryDto save(RequestHistoryDto request) {
-        return null;
+    public RequestHistoryDto save(RequestHistoryDto requestHistory) {
+        return converter.convertToDto(repository.save(converter.convertToEntity(requestHistory)));
     }
 
     @Override
-    public RequestHistoryDto update(RequestHistoryDto request) {
-        return null;
+    public RequestHistoryDto update(RequestHistoryDto requestHistory) {
+        return converter.convertToDto(repository.save(converter.convertToEntity(requestHistory)));
     }
 
     @Override
@@ -37,11 +37,11 @@ public class RequestHistoryServiceImpl implements RequestHistoryService {
 
     @Override
     public List<RequestHistoryDto> list() {
-        return null;
+        return converter.convertToDtoList(repository.findAll());
     }
 
     @Override
     public List<RequestHistoryDto> filter(long requestId) {
-        return converter.convertToDtoList(repository.findAll());
+        return converter.convertToDtoList(repository.findByRequestId(requestId));
     }
 }

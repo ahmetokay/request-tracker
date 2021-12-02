@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface RequestHistoryService {
 
-    RequestHistoryDto save(RequestHistoryDto request);
+    RequestHistoryDto save(RequestHistoryDto requestHistory);
 
-    RequestHistoryDto update(RequestHistoryDto request);
+    RequestHistoryDto update(RequestHistoryDto requestHistory);
 
     RequestHistoryDto get(long id);
 
