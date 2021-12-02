@@ -1,9 +1,8 @@
 ---DELETE TABLE---
 DROP TABLE IF EXISTS "rt_request_history";
 DROP TABLE IF EXISTS "rt_response_type";
-DROP TABLE IF EXISTS "rt_workspace_request";
-DROP TABLE IF EXISTS "rt_workspace";
 DROP TABLE IF EXISTS "rt_request";
+DROP TABLE IF EXISTS "rt_workspace";
 DROP TABLE IF EXISTS "rt_scheduled_type";
 DROP TABLE IF EXISTS "rt_request_type";
 DROP TABLE IF EXISTS "rt_user_role";
@@ -80,7 +79,6 @@ CREATE TABLE "rt_user"
       );
 
 
-
 CREATE TABLE "rt_user_role"
 (
     "id"         serial NOT NULL,
@@ -103,6 +101,7 @@ ALTER TABLE "rt_user_role"
 ALTER TABLE "rt_user_role"
     ADD CONSTRAINT "rt_user_role_fk3" FOREIGN KEY ("fk_user_id") REFERENCES "rt_user" ("id");
 
+
 CREATE TABLE "rt_workspace"
 (
     "id"         serial       NOT NULL,
@@ -110,6 +109,7 @@ CREATE TABLE "rt_workspace"
     "created_by" bigint,
     "updated"    DATE,
     "updated_by" bigint,
+    "fk_user_id" bigint NOT NULL,
     "name"       varchar(255) NOT NULL,
     CONSTRAINT "rt_workspace_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -119,7 +119,8 @@ ALTER TABLE "rt_workspace"
     ADD CONSTRAINT "rt_workspace_fk0" FOREIGN KEY ("created_by") REFERENCES "rt_user" ("id");
 ALTER TABLE "rt_workspace"
     ADD CONSTRAINT "rt_workspace_fk1" FOREIGN KEY ("updated_by") REFERENCES "rt_user" ("id");
-
+ALTER TABLE "rt_workspace"
+    ADD CONSTRAINT "rt_workspace_fk2" FOREIGN KEY ("fk_user_id") REFERENCES "rt_user" ("id");
 
 
 CREATE TABLE "rt_request"
@@ -129,6 +130,7 @@ CREATE TABLE "rt_request"
     "created_by"           bigint,
     "updated"              DATE,
     "updated_by"           bigint,
+    "fk_workspace_id"      bigint       NOT NULL,
     "fk_request_type_id"   bigint       NOT NULL,
     "fk_scheduled_type_id" bigint       NOT NULL,
     "url"                  varchar(255) NOT NULL,
@@ -142,32 +144,11 @@ ALTER TABLE "rt_request"
 ALTER TABLE "rt_request"
     ADD CONSTRAINT "rt_request_fk1" FOREIGN KEY ("updated_by") REFERENCES "rt_user" ("id");
 ALTER TABLE "rt_request"
-    ADD CONSTRAINT "rt_request_fk2" FOREIGN KEY ("fk_request_type_id") REFERENCES "rt_request_type" ("id");
+    ADD CONSTRAINT "rt_request_fk2" FOREIGN KEY ("fk_workspace_id") REFERENCES "rt_workspace" ("id");
 ALTER TABLE "rt_request"
-    ADD CONSTRAINT "rt_request_fk3" FOREIGN KEY ("fk_scheduled_type_id") REFERENCES "rt_scheduled_type" ("id");
-
-
-CREATE TABLE "rt_workspace_request"
-(
-    "id"              serial NOT NULL,
-    "created"         DATE,
-    "created_by"      bigint,
-    "updated"         DATE,
-    "updated_by"      bigint,
-    "fk_workspace_id" bigint NOT NULL,
-    "fk_request_id"   bigint NOT NULL,
-    CONSTRAINT "rt_workspace_request_pk" PRIMARY KEY ("id")
-) WITH (
-      OIDS = FALSE
-      );
-ALTER TABLE "rt_workspace_request"
-    ADD CONSTRAINT "rt_workspace_request_fk0" FOREIGN KEY ("created_by") REFERENCES "rt_user" ("id");
-ALTER TABLE "rt_workspace_request"
-    ADD CONSTRAINT "rt_workspace_request_fk1" FOREIGN KEY ("updated_by") REFERENCES "rt_user" ("id");
-ALTER TABLE "rt_workspace_request"
-    ADD CONSTRAINT "rt_workspace_request_fk2" FOREIGN KEY ("fk_workspace_id") REFERENCES "rt_workspace" ("id");
-ALTER TABLE "rt_workspace_request"
-    ADD CONSTRAINT "rt_workspace_request_fk3" FOREIGN KEY ("fk_request_id") REFERENCES "rt_request" ("id");
+    ADD CONSTRAINT "rt_request_fk3" FOREIGN KEY ("fk_request_type_id") REFERENCES "rt_request_type" ("id");
+ALTER TABLE "rt_request"
+    ADD CONSTRAINT "rt_request_fk4" FOREIGN KEY ("fk_scheduled_type_id") REFERENCES "rt_scheduled_type" ("id");
 
 
 CREATE TABLE "rt_request_history"
@@ -206,6 +187,24 @@ INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_use
 INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 2);
 INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 2, 1);
 INSERT INTO "rt_user_role" (id, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 2, 2);
+
+INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'POST');
+INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'GET');
+INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'PUT');
+INSERT INTO "rt_request_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 'UPDATE');
+
+INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '200');
+INSERT INTO "rt_response_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '404');
+
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '1_MIN');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '15_MIN');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '30_MIN');
+INSERT INTO "rt_scheduled_type" (id, created, created_by, updated, updated_by, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, '60_MIN');
+
+INSERT INTO "rt_workspace" (id, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 'Test Workspace');
+
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, fk_scheduled_type_id, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 1, '127.0.0.1', '5055');
+INSERT INTO "rt_request" (id, created, created_by, updated, updated_by, fk_workspace_id, fk_request_type_id, fk_scheduled_type_id, url, port) VALUES (DEFAULT, NULL, NULL, NULL, NULL, 1, 1, 2, '127.0.0.1', '5055');
 
 
 -- ALTER TABLE "rt_user"

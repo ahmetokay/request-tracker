@@ -4,11 +4,7 @@ import com.okay.core.BaseModel;
 import lombok.Data;
 
 @Data
-public class UserDto extends BaseModel {
-
-    private String email;
+public class RequestTypeDto extends BaseModel {
 
     private String name;
-
-    private String surname;
 }

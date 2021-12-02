@@ -10,7 +10,7 @@ public abstract class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "created", updatable = false)
     private Date created;
@@ -24,11 +24,11 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "updated_by")
     private Integer updatedBy;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

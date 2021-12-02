@@ -1,34 +1,42 @@
 package com.okay.service.impl;
 
+import com.okay.converter.UserConverter;
 import com.okay.model.UserDto;
+import com.okay.repository.UserRepository;
 import com.okay.service.UserService;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class UserServiceImpl implements UserService {
 
-    private List<UserDto> userList;
+    private UserRepository repository;
 
-    public UserServiceImpl() {
-        userList = new ArrayList<>();
-        userList.add(UserDto.builder().name("Ahmet1").surname("Okay1").build());
-        userList.add(UserDto.builder().name("Ahmet2").surname("Okay2").build());
-        userList.add(UserDto.builder().name("Ahmet3").surname("Okay3").build());
-        userList.add(UserDto.builder().name("Ahmet4").surname("Okay4").build());
-        userList.add(UserDto.builder().name("Ahmet5").surname("Okay5").build());
+    private UserConverter converter;
+
+    public UserServiceImpl(UserRepository repository, UserConverter converter) {
+        this.repository = repository;
+        this.converter = converter;
     }
 
     @Override
-    public UserDto get(long userId) {
-        return userList.get(0);
+    public UserDto save(UserDto user) {
+        return null;
     }
 
     @Override
-    public List<UserDto> filter(String name, String surname) {
-        //TODO not filtering
-        return userList;
+    public UserDto update(UserDto user) {
+        return null;
+    }
+
+    @Override
+    public UserDto get(long id) {
+        return converter.convertToDto(repository.findById(id).get());
+    }
+
+    @Override
+    public List<UserDto> list() {
+        return converter.convertToDtoList(repository.findAll());
     }
 }

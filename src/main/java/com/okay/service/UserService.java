@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDto get(long userId);
-    List<UserDto> filter(String name, String surname);
+    UserDto save(UserDto user);
+
+    UserDto update(UserDto user);
+
+    UserDto get(long id);
+
+    List<UserDto> list();
 }

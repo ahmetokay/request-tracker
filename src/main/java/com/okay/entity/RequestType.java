@@ -9,18 +9,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "rt_user")
-public class User extends BaseEntity {
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
+@Table(name = "rt_request_type")
+public class RequestType extends BaseEntity {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "surname")
-    private String surname;
 }

@@ -1,6 +1,6 @@
 package com.okay.core;
 
-import org.springframework.beans.BeanUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Constructor;
@@ -17,13 +17,18 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
 
     private Class<E> entityClass;
 
+    private DozerBeanMapper mapper;
+
     public AbstractBaseConverter() {
         this.dtoClass = (Class<D>) (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
         this.entityClass = (Class<E>) (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
+
+        mapper = new DozerBeanMapper();
     }
 
     public Set<D> convertToDtoSet(Collection<E> entitySet) {
-        return entitySet == null ? null : entitySet.stream().map(this::convertToDto).collect(Collectors.toSet());
+        return entitySet == null ? null
+                : entitySet.stream().map(this::convertToDto).collect(Collectors.toSet());
     }
 
     public List<D> convertToDtoList(Collection<E> entityList) {
@@ -35,9 +40,7 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
             return null;
         }
 
-        D dto = createDto();
-        BeanUtils.copyProperties(entity, dto);
-        return dto;
+        return mapper.map(entity, dtoClass);
     }
 
     public Set<E> convertToEntitySet(Collection<D> dtoSet) {
@@ -54,9 +57,7 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
             return null;
         }
 
-        E entity = createEntity();
-        BeanUtils.copyProperties(dto, entity);
-        return entity;
+        return mapper.map(dto, entityClass);
     }
 
     private D createDto() {
