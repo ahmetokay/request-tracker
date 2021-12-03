@@ -4,6 +4,10 @@ server:
     context-path: /request-tracker
     application-display-name: request-tracker
 spring:
+  security:
+    user:
+      name: ahmet
+      password: 123456
   main:
     allow-bean-definition-overriding: true
   datasource:

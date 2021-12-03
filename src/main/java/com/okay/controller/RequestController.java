@@ -1,9 +1,11 @@
 package com.okay.controller;
 
+import com.okay.constant.RoleConstants;
 import com.okay.model.RequestDto;
 import com.okay.service.RequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class RequestController {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
+    @Secured({RoleConstants.ROLE_USER})
     @GetMapping(value = "/list")
     public ResponseEntity<List<RequestDto>> list() {
         return new ResponseEntity<>(service.list(), HttpStatus.OK);

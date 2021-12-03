@@ -1,11 +1,13 @@
 package com.okay.service.impl;
 
 import com.okay.converter.UserConverter;
+import com.okay.entity.User;
 import com.okay.model.UserDto;
 import com.okay.repository.UserRepository;
 import com.okay.service.UserService;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -44,4 +46,6 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> list() {
         return converter.convertToDtoList(repository.findAll());
     }
+
+
 }

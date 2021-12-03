@@ -141,8 +141,8 @@ ALTER TABLE "rt_request_history"
 
 
 ---INSERT TABLE---
-INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ADMIN');
-INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'USER');
+INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ROLE_ADMIN');
+INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ROLE_USER');
 
 
 INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ahmet@ahmet.com', '123456', 'Ahmet', 'Okay');
