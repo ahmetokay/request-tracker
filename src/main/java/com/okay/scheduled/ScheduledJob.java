@@ -51,13 +51,11 @@ public class ScheduledJob {
         int successCount = 0, failCount = 0;
         List<RequestDto> requestList = requestService.filter(scheduledType);
         for (RequestDto request : requestList) {
-            try {
-                RequestHistoryDto requestHistory = RequestUtils.prepareRequest(request);
-                requestHistoryService.save(requestHistory);
+            RequestHistoryDto requestHistory = RequestUtils.sendRequest(requestHistoryService, request);
+            if (requestHistory.getResponseCode() == 200) {
                 successCount++;
-            } catch (Exception e) {
+            } else {
                 failCount++;
-                LOGGER.error(e.getMessage());
             }
         }
 
