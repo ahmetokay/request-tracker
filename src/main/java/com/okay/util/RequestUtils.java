@@ -3,6 +3,8 @@ package com.okay.util;
 import com.okay.enm.EnumRequestType;
 import com.okay.model.RequestDto;
 import com.okay.model.RequestHistoryDto;
+import com.okay.service.RequestHistoryService;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +29,7 @@ public class RequestUtils {
     private static final String PROTOCOL_SEPARATOR = "://";
     private static final String COLON_SEPARATOR = ":";
 
-    public static RequestHistoryDto prepareRequest(RequestDto request) throws IOException {
+    public static RequestHistoryDto sendRequest(RequestHistoryService requestHistoryService, RequestDto request) {
         HttpURLConnection connection = null;
 
         RequestHistoryDto requestHistory = createRequestHistory(request);
@@ -75,12 +77,20 @@ public class RequestUtils {
                 }
                 requestHistory.setBody(response.toString());
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
         } finally {
-            if (connection != null) {
-                requestHistory.setResponseCode(connection.getResponseCode());
+            try {
+                if (connection != null) {
+                    requestHistory.setResponseCode(connection.getResponseCode());
+                } else {
+                    requestHistory.setResponseCode(-1);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            requestHistoryService.save(requestHistory);
         }
 
         return requestHistory;
