@@ -12,9 +12,9 @@ import java.util.List;
 @Component
 public class RequestServiceImpl implements RequestService {
 
-    private RequestRepository repository;
+    private final RequestRepository repository;
 
-    private RequestConverter converter;
+    private final RequestConverter converter;
 
     public RequestServiceImpl(RequestRepository repository, RequestConverter converter) {
         this.repository = repository;
@@ -43,6 +43,6 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<RequestDto> filter(EnumScheduledType scheduledType) {
-        return converter.convertToDtoList(repository.findByScheduledType(scheduledType));
+        return converter.convertToDtoList(repository.findByActiveIsTrueAndScheduledType(scheduledType));
     }
 }

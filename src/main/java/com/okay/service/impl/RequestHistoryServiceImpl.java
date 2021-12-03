@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class RequestHistoryServiceImpl implements RequestHistoryService {
 
-    private RequestHistoryRepository repository;
+    private final RequestHistoryRepository repository;
 
-    private RequestHistoryConverter converter;
+    private final RequestHistoryConverter converter;
 
     public RequestHistoryServiceImpl(RequestHistoryRepository repository, RequestHistoryConverter converter) {
         this.repository = repository;

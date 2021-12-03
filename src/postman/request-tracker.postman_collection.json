@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "498e4843-6c2b-4b0e-828b-9620290179e3",
+		"_postman_id": "6fb44024-d3a4-4149-b906-4bc59a86655c",
 		"name": "request-tracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -177,6 +177,76 @@
 			"response": []
 		},
 		{
+			"name": "Request - Save request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"workspace\": {\r\n            \"id\": 1\r\n        },\r\n        \"name\": \"test1\",\r\n        \"protocol\": \"HTTPS\",\r\n        \"requestType\": \"GET\",\r\n        \"scheduledType\": \"MIN1\",\r\n        \"url\": \"142.250.184.142\",\r\n        \"port\": \"443\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5055/request-tracker/request/save",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"request",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request - List request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5055/request-tracker/request/list",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"request",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request - Get request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5055/request-tracker/request/get/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"request",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Request History - List request history",
 			"request": {
 				"method": "GET",
@@ -218,40 +288,20 @@
 			"response": []
 		},
 		{
-			"name": "Request - List request",
+			"name": "Request History - Filter request history",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5055/request-tracker/request/list",
+					"raw": "localhost:5055/request-tracker/request-history/filter/1",
 					"host": [
 						"localhost"
 					],
 					"port": "5055",
 					"path": [
 						"request-tracker",
-						"request",
-						"list"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request - Get request",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/request/get/1",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"request",
-						"get",
+						"request-history",
+						"filter",
 						"1"
 					]
 				}
@@ -313,6 +363,26 @@
 						"request-tracker",
 						"parameter",
 						"response-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5055/request-tracker/parameter/request",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"parameter",
+						"request"
 					]
 				}
 			},

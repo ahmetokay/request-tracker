@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends BaseRepository<Request> {
 
-    List<Request> findByScheduledType(EnumScheduledType scheduledType);
+    List<Request> findByActiveIsTrueAndScheduledType(EnumScheduledType scheduledType);
 }

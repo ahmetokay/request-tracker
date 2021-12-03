@@ -15,9 +15,11 @@ public class RequestHistory extends BaseEntity {
     @JoinColumn(name = "fk_request_id")
     private Request request;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_response_type_id")
-    private ResponseType responseType;
+    @Column(name = "response_code")
+    private Integer responseCode;
+
+    @Column(name = "body")
+    private String body;
 
     @Column(name = "request_date")
     private Date requestDate;
