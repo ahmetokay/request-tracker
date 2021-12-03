@@ -18,7 +18,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
         //if (shouldAuthenticateAgainstThirdPartySystem()) {
-            if (true) {
+        if (true) {
 
             // use the credentials
             // and authenticate against the third-party system

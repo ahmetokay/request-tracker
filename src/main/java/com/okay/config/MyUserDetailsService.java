@@ -38,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoleList()));
     }
 
-    private static List<GrantedAuthority> getAuthorities (List<Role> roleList) {
+    private static List<GrantedAuthority> getAuthorities(List<Role> roleList) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roleList) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
