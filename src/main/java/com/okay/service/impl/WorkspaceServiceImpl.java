@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class WorkspaceServiceImpl implements WorkspaceService {
 
-    private WorkspaceRepository repository;
+    private final WorkspaceRepository repository;
 
-    private WorkspaceConverter converter;
+    private final WorkspaceConverter converter;
 
     public WorkspaceServiceImpl(WorkspaceRepository repository, WorkspaceConverter converter) {
         this.repository = repository;

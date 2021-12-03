@@ -10,7 +10,9 @@ public class RequestHistoryDto extends BaseModel {
 
     private RequestDto request;
 
-    private ResponseTypeDto responseType;
+    private Integer responseCode;
+
+    private String body;
 
     private Date requestDate;
 }

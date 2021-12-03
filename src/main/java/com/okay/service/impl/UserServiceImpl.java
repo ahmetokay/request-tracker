@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class UserServiceImpl implements UserService {
 
-    private UserRepository repository;
+    private final UserRepository repository;
 
-    private UserConverter converter;
+    private final UserConverter converter;
 
     public UserServiceImpl(UserRepository repository, UserConverter converter) {
         this.repository = repository;

@@ -2,7 +2,10 @@ package com.okay.scheduled;
 
 import com.okay.enm.EnumScheduledType;
 import com.okay.model.RequestDto;
+import com.okay.model.RequestHistoryDto;
+import com.okay.service.RequestHistoryService;
 import com.okay.service.RequestService;
+import com.okay.util.RequestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,16 +18,49 @@ public class ScheduledJob {
 
     private Logger LOGGER = LoggerFactory.getLogger(ScheduledJob.class);
 
-    private RequestService requestService;
+    private final RequestService requestService;
 
-    public ScheduledJob(RequestService requestService) {
+    private final RequestHistoryService requestHistoryService;
+
+    public ScheduledJob(RequestService requestService, RequestHistoryService requestHistoryService) {
         this.requestService = requestService;
+        this.requestHistoryService = requestHistoryService;
     }
 
-    //    @Scheduled(cron = "0 */1 * * * ?")
-    @Scheduled(cron = "0 * * * * ?")
-    public void perform() throws Exception {
-        List<RequestDto> list = requestService.filter(EnumScheduledType.MIN15);
-        LOGGER.info(list.toString());
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void interval1Min() {
+        processInterval(EnumScheduledType.MIN1);
+    }
+
+    @Scheduled(cron = "0 0/15 * * * ?")
+    public void interval15Min() {
+        processInterval(EnumScheduledType.MIN15);
+    }
+
+    @Scheduled(cron = "0 0/30 * * * ?")
+    public void interval30Min() {
+        processInterval(EnumScheduledType.MIN30);
+    }
+
+    @Scheduled(cron = "0 0/60 * * * ?")
+    public void interval60Min() {
+        processInterval(EnumScheduledType.MIN60);
+    }
+
+    private void processInterval(EnumScheduledType scheduledType) {
+        int successCount = 0, failCount = 0;
+        List<RequestDto> requestList = requestService.filter(scheduledType);
+        for (RequestDto request : requestList) {
+            try {
+                RequestHistoryDto requestHistory = RequestUtils.prepareRequest(request);
+                requestHistoryService.save(requestHistory);
+                successCount++;
+            } catch (Exception e) {
+                failCount++;
+                LOGGER.error(e.getMessage());
+            }
+        }
+
+        LOGGER.info("Interval {} job worked with {} request(s): [ {} success / {} error ]", scheduledType, requestList.size(), successCount, failCount);
     }
 }

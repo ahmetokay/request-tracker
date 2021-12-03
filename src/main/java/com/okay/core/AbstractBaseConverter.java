@@ -22,8 +22,6 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
     public AbstractBaseConverter() {
         this.dtoClass = (Class<D>) (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
         this.entityClass = (Class<E>) (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
-
-        mapper = new DozerBeanMapper();
     }
 
     public Set<D> convertToDtoSet(Collection<E> entitySet) {
@@ -40,7 +38,7 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
             return null;
         }
 
-        return mapper.map(entity, dtoClass);
+        return getBeanMapper().map(entity, dtoClass);
     }
 
     public Set<E> convertToEntitySet(Collection<D> dtoSet) {
@@ -57,7 +55,7 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
             return null;
         }
 
-        return mapper.map(dto, entityClass);
+        return getBeanMapper().map(dto, entityClass);
     }
 
     private D createDto() {
@@ -78,5 +76,13 @@ public abstract class AbstractBaseConverter<D extends BaseModel, E extends BaseE
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private DozerBeanMapper getBeanMapper() {
+        if (mapper == null) {
+            mapper = new DozerBeanMapper();
+        }
+
+        return mapper;
     }
 }

@@ -1,33 +1,25 @@
 package com.okay.controller;
 
-import com.okay.model.RequestTypeDto;
-import com.okay.model.ResponseTypeDto;
-import com.okay.service.ParameterService;
+import com.okay.model.RequestDto;
+import com.okay.service.RequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/parameter")
 public class ParameterController {
 
-    private ParameterService service;
+    private RequestService service;
 
-    public ParameterController(ParameterService service) {
+    public ParameterController(RequestService service) {
         this.service = service;
     }
 
-    @GetMapping(value = "/request-type")
-    public ResponseEntity<List<RequestTypeDto>> requestTypeList() {
-        return new ResponseEntity<>(service.requestTypeList(), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/response-type")
-    public ResponseEntity<List<ResponseTypeDto>> responseTypeList() {
-        return new ResponseEntity<>(service.responseTypeList(), HttpStatus.OK);
+    @GetMapping(value = "/request")
+    public ResponseEntity<RequestDto> requestTest() {
+        return new ResponseEntity<>(service.get(1), HttpStatus.OK);
     }
 }
