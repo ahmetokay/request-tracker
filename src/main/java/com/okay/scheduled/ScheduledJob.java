@@ -50,14 +50,14 @@ public class ScheduledJob {
     private void processInterval(EnumScheduledType scheduledType) {
         int successCount = 0, failCount = 0;
         List<RequestDto> requestList = requestService.filter(scheduledType);
-        for (RequestDto request : requestList) {
-            RequestHistoryDto requestHistory = RequestUtils.sendRequest(requestHistoryService, request);
-            if (requestHistory.getResponseCode() == 200) {
-                successCount++;
-            } else {
-                failCount++;
-            }
-        }
+//        for (RequestDto request : requestList) {
+//            boolean error = RequestUtils.sendRequest(requestHistoryService, request);
+//            if (!error) {
+//                successCount++;
+//            } else {
+//                failCount++;
+//            }
+//        }
         LOGGER.info("Interval {} job worked with {} request(s): [ {} success / {} error ]", scheduledType, requestList.size(), successCount, failCount);
     }
 }

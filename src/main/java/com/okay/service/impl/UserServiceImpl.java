@@ -1,13 +1,11 @@
 package com.okay.service.impl;
 
 import com.okay.converter.UserConverter;
-import com.okay.entity.User;
 import com.okay.model.UserDto;
 import com.okay.repository.UserRepository;
 import com.okay.service.UserService;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findByUsername(String username) {
-        return converter.convertToDto(repository.findByEmail(username));
+    public UserDto findByEmail(String email) {
+        return converter.convertToDto(repository.findByEmail(email));
     }
 
     @Override

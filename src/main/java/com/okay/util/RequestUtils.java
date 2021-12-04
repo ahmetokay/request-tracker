@@ -29,7 +29,9 @@ public class RequestUtils {
     private static final String PROTOCOL_SEPARATOR = "://";
     private static final String COLON_SEPARATOR = ":";
 
-    public static RequestHistoryDto sendRequest(RequestHistoryService requestHistoryService, RequestDto request) {
+    public static boolean sendRequest(RequestHistoryService requestHistoryService, RequestDto request) {
+        boolean error = false;
+
         HttpURLConnection connection = null;
 
         RequestHistoryDto requestHistory = createRequestHistory(request);
@@ -78,6 +80,8 @@ public class RequestUtils {
                 requestHistory.setBody(response.toString());
             }
         } catch (Exception e) {
+            error = true;
+
             LOGGER.error(e.getMessage());
         } finally {
             try {
@@ -93,7 +97,7 @@ public class RequestUtils {
             requestHistoryService.save(requestHistory);
         }
 
-        return requestHistory;
+        return error;
     }
 
     private static URL prepareURI(RequestDto request) throws MalformedURLException {

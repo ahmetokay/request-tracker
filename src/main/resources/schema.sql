@@ -145,8 +145,8 @@ INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, nam
 INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ROLE_USER');
 
 
-INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ahmet@ahmet.com', '123456', 'Ahmet', 'Okay');
-INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '123456', 'Turkuaz', 'Şengül');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ahmet@ahmet.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Ahmet', 'Okay');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Turkuaz', 'Şengül');
 
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 1);
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 2);

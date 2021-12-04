@@ -31,12 +31,8 @@ public class AuditorAwareImpl implements AuditorAware<Long> {
                 username = principal.toString();
             }
 
-            if (NumberUtils.isParsable(username)) {
-                UserDto user = userService.findByUsername(username);
-                return Optional.of(user != null ? user.getId() : -1);
-            } else {
-                return Optional.of(-1L);
-            }
+            UserDto user = userService.findByEmail(username);
+            return Optional.of(user != null ? user.getId() : -1);
         }
     }
 

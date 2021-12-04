@@ -1,6 +1,8 @@
 package com.okay.core;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -23,14 +25,16 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "created", updatable = false)
     private Date created;
 
+    @CreatedBy
     @Column(name = "created_by", updatable = false)
-    private Integer createdBy;
+    private Long createdBy;
 
     @Column(name = "updated")
     private Date updated;
 
+    @LastModifiedBy
     @Column(name = "updated_by")
-    private Integer updatedBy;
+    private Long updatedBy;
 
     @PrePersist
     public void prePersist() {

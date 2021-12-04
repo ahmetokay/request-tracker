@@ -3,7 +3,6 @@ package com.okay.config;
 import com.okay.entity.Role;
 import com.okay.entity.User;
 import com.okay.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,25 +16,21 @@ import java.util.List;
 
 @Component
 @Transactional
-public class MyUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        user = userRepository.findById(1L).get();
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + email);
         }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
 
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword().toLowerCase(), enabled, accountNonExpired,
-                credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoleList()));
+        return new UserPrincipal(user, getAuthorities(user.getRoleList()));
     }
 
     private static List<GrantedAuthority> getAuthorities(List<Role> roleList) {
