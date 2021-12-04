@@ -9,13 +9,25 @@
 			"name": "Login",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ahmet@ahmet.com",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"ahmet\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
