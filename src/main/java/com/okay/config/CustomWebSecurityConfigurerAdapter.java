@@ -1,6 +1,5 @@
 package com.okay.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,23 +19,19 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private final CustomAuthenticationProvider authenticationProvider;
 
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
+    public CustomWebSecurityConfigurerAdapter(CustomAuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // authentication manager (see below)
-//        auth.userDetailsService(userDetailsService);
-        auth.authenticationProvider(authProvider);
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http builder configurations for authorize requests and form login (see below)
-
         http.httpBasic()
                 .and()
                 .logout(logout -> logout.logoutUrl("/auth/logout").addLogoutHandler(new SecurityContextLogoutHandler()))
@@ -55,11 +50,6 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
-//    @Bean
-//    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-//        return new TokenAuthenticationFilter();
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

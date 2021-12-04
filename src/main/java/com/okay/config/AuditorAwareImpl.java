@@ -2,7 +2,6 @@ package com.okay.config;
 
 import com.okay.model.UserDto;
 import com.okay.service.UserService;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +20,7 @@ public class AuditorAwareImpl implements AuditorAware<Long> {
 
         if (SecurityContextHolder.getContext() == null || SecurityContextHolder.getContext().getAuthentication() == null) {
             //if create by system
-            return Optional.of(-1L);
+            return Optional.of(1L);
         } else {
             String username;
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,7 +31,7 @@ public class AuditorAwareImpl implements AuditorAware<Long> {
             }
 
             UserDto user = userService.findByEmail(username);
-            return Optional.of(user != null ? user.getId() : -1);
+            return Optional.of(user != null ? user.getId() : 1L);
         }
     }
 

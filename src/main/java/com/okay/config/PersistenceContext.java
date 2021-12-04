@@ -14,8 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class PersistenceContext {
 
     @Bean
-    public AuditorAware<Long> auditorAware()
-    {
+    public AuditorAware<Long> auditorAware() {
         return new AuditorAwareImpl();
     }
 }

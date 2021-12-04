@@ -26,16 +26,22 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        UserPrincipal userDetails = (UserPrincipal) userDetailsService.loadUserByUsername(email);
+        UserPrincipal userDetails;
 
-        if (!getPasswordEncoder().matches(password, userDetails.getPassword())) {
-            throw new CustomAuthException("incorrectPassword");
-        }
-        if (!userDetails.isAccountNonExpired()) {
-            throw new CustomAuthException("accountExpired");
-        }
-        if (!userDetails.isEnabled()) {
-            throw new CustomAuthException("accountNotActive");
+        try {
+            userDetails = (UserPrincipal) userDetailsService.loadUserByUsername(email);
+
+            if (!getPasswordEncoder().matches(password, userDetails.getPassword())) {
+                throw new CustomAuthException("incorrectPassword");
+            }
+            if (!userDetails.isAccountNonExpired()) {
+                throw new CustomAuthException("accountExpired");
+            }
+            if (!userDetails.isEnabled()) {
+                throw new CustomAuthException("accountNotActive");
+            }
+        } catch (Exception e) {
+            throw e;
         }
 
         return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
