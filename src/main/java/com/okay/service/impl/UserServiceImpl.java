@@ -6,6 +6,7 @@ import com.okay.repository.UserRepository;
 import com.okay.service.UserService;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -21,8 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findByEmail(String email) {
-        return converter.convertToDto(repository.findByEmail(email));
+    public UserDto findByUsername(String username) {
+        return converter.convertToDto(repository.findByUsername(username));
     }
 
     @Override

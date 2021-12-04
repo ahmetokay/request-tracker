@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDto findByEmail(String email);
+    UserDto findByUsername(String username);
 
     UserDto save(UserDto user);
 

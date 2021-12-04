@@ -30,7 +30,7 @@ public class AuditorAwareImpl implements AuditorAware<Long> {
                 username = principal.toString();
             }
 
-            UserDto user = userService.findByEmail(username);
+            UserDto user = userService.findByUsername(username);
             return Optional.of(user != null ? user.getId() : 1L);
         }
     }

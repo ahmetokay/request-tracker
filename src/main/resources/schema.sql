@@ -1,6 +1,7 @@
 ---DELETE TABLE---
 DROP TABLE IF EXISTS "rt_request_history";
 DROP TABLE IF EXISTS "rt_request";
+DROP TABLE IF EXISTS "rt_menu";
 DROP TABLE IF EXISTS "rt_workspace";
 DROP TABLE IF EXISTS "rt_user_role";
 DROP TABLE IF EXISTS "rt_user";
@@ -31,7 +32,7 @@ CREATE TABLE "rt_user"
     "created_by" bigint,
     "updated"    TIMESTAMP,
     "updated_by" bigint,
-    "email"      varchar(150) NOT NULL,
+    "username"   varchar(150) NOT NULL,
     "password"   varchar(100) NOT NULL,
     "name"       varchar(100),
     "surname"    varchar(100),
@@ -40,6 +41,27 @@ CREATE TABLE "rt_user"
       OIDS = FALSE
       );
 
+CREATE TABLE "rt_menu"
+(
+    "id"         serial NOT NULL,
+    "active"     boolean,
+    "created"    TIMESTAMP,
+    "created_by" bigint,
+    "updated"    TIMESTAMP,
+    "updated_by" bigint,
+    "fk_role_id" bigint NOT NULL,
+    "name"       varchar(100) NOT NULL,
+    "ordering"   bigint NOT NULL,
+    CONSTRAINT "rt_menu_pk" PRIMARY KEY ("id")
+) WITH (
+      OIDS = FALSE
+      );
+ALTER TABLE "rt_menu"
+    ADD CONSTRAINT "rt_menu_fk0" FOREIGN KEY ("created_by") REFERENCES "rt_user" ("id");
+ALTER TABLE "rt_menu"
+    ADD CONSTRAINT "rt_menu_fk1" FOREIGN KEY ("updated_by") REFERENCES "rt_user" ("id");
+ALTER TABLE "rt_menu"
+    ADD CONSTRAINT "rt_menu_fk2" FOREIGN KEY ("fk_role_id") REFERENCES "rt_role" ("id");
 
 CREATE TABLE "rt_user_role"
 (
@@ -144,10 +166,15 @@ ALTER TABLE "rt_request_history"
 INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ROLE_ADMIN');
 INSERT INTO "rt_role" (id, active, created, created_by, updated, updated_by, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ROLE_USER');
 
+INSERT INTO "rt_menu" (id, active, created, created_by, updated, updated_by, fk_role_id, name, ordering) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 'dashboard', 1);
+INSERT INTO "rt_menu" (id, active, created, created_by, updated, updated_by, fk_role_id, name, ordering) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 'adminPanel', 2);
+INSERT INTO "rt_menu" (id, active, created, created_by, updated, updated_by, fk_role_id, name, ordering) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 'workspace', 3);
+INSERT INTO "rt_menu" (id, active, created, created_by, updated, updated_by, fk_role_id, name, ordering) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 'request', 4);
 
-INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'system', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'System', 'System');
-INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ahmet@ahmet.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Ahmet', 'Okay');
-INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, email, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Turkuaz', 'Şengül');
+
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, username, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'system', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'System', 'System');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, username, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'ahmet@ahmet.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Ahmet', 'Okay');
+INSERT INTO "rt_user" (id, active, created, created_by, updated, updated_by, username, password, name, surname) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 'turkuaz@turkuaz.com', '$2a$10$80WiHKEitsuW6U46G.DREueXP86fKziYwLoYqzUcPzoeSZu/u/pJK', 'Turkuaz', 'Şengül');
 
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 1);
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 2);

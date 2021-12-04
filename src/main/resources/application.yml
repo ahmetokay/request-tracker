@@ -31,3 +31,5 @@ spring:
   session:
     servlet:
       filter-order: 3
+  jackson:
+    default-property-inclusion: NON_NULL

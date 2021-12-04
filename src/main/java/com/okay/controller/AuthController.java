@@ -26,7 +26,7 @@ public class AuthController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<UserDto> login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDto userDto = userService.findByEmail((String) auth.getPrincipal());
+        UserDto userDto = userService.findByUsername((String) auth.getPrincipal());
         if (userDto == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else {

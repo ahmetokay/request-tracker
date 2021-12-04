@@ -13,7 +13,7 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "123456",
+							"value": "1234569",
 							"type": "string"
 						},
 						{
@@ -192,6 +192,35 @@
 			"response": []
 		},
 		{
+			"name": "Request - Update request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6,\r\n    \"active\": true,\r\n    \"created\": \"2021-12-04T20:04:38.218+0000\",\r\n    \"createdBy\": 2,\r\n    \"updated\": \"2021-12-04T20:04:38.218+0000\",\r\n    \"updatedBy\": 2,\r\n    \"workspace\": {\r\n        \"id\": 1\r\n    },\r\n    \"requestType\": \"GET\",\r\n    \"scheduledType\": \"MIN1\",\r\n    \"protocol\": \"HTTPS\",\r\n    \"name\": \"test55\",\r\n    \"url\": \"142.250.184.142\",\r\n    \"port\": \"443\",\r\n    \"body\": null,\r\n    \"tryCount\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5055/request-tracker/request/save",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"request",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Request - List request",
 			"request": {
 				"method": "GET",
@@ -295,80 +324,20 @@
 			"response": []
 		},
 		{
-			"name": "Parameter - List scheduled type",
+			"name": "Menu - List menu",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/scheduled-type",
+					"raw": "localhost:5055/request-tracker/menu/list",
 					"host": [
 						"localhost"
 					],
 					"port": "5055",
 					"path": [
 						"request-tracker",
-						"parameter",
-						"scheduled-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Parameter - List reqeust type",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/request-type",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"request-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Parameter - List response type",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/response-type",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"response-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Test",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/request",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"request"
+						"menu",
+						"list"
 					]
 				}
 			},
