@@ -153,6 +153,8 @@ INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 2);
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 2, 1);
 INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 2, 2);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 3, 1);
+INSERT INTO "rt_user_role" (id, active, created, created_by, updated, updated_by, fk_user_id, fk_role_id) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 3, 2);
 
 INSERT INTO "rt_workspace" (id, active, created, created_by, updated, updated_by, fk_user_id, name) VALUES (DEFAULT, true, CURRENT_TIMESTAMP, NULL, NULL, NULL, 1, 'Test Workspace');
 
