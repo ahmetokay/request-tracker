@@ -1,86 +1,72 @@
 {
 	"info": {
-		"_postman_id": "6fb44024-d3a4-4149-b906-4bc59a86655c",
+		"_postman_id": "24cbdeae-2b07-43c3-8438-13ed245145db",
 		"name": "request-tracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Login",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
-					"type": "oauth2",
-					"oauth2": [
-						{
-							"key": "client_authentication",
-							"value": "header",
-							"type": "string"
-						},
+					"type": "basic",
+					"basic": [
 						{
 							"key": "password",
-							"value": "123456",
+							"value": "1234569",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "ahmet@test.com",
-							"type": "string"
-						},
-						{
-							"key": "addTokenTo",
-							"value": "header",
-							"type": "string"
-						},
-						{
-							"key": "headerPrefix",
-							"value": "Bearer",
-							"type": "string"
-						},
-						{
-							"key": "grant_type",
-							"value": "password_credentials",
-							"type": "string"
-						},
-						{
-							"key": "tokenName",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "scope",
-							"value": "client",
-							"type": "string"
-						},
-						{
-							"key": "clientSecret",
-							"value": "iptv",
-							"type": "string"
-						},
-						{
-							"key": "clientId",
-							"value": "iptv-client",
+							"value": "ahmet@ahmet.com",
 							"type": "string"
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "localhost:5055/request-tracker/login",
+					"raw": "localhost:5055/request-tracker/auth/login",
 					"host": [
 						"localhost"
 					],
 					"port": "5055",
 					"path": [
 						"request-tracker",
+						"auth",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5055/request-tracker/auth/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"auth",
+						"logout"
 					]
 				}
 			},
@@ -206,6 +192,35 @@
 			"response": []
 		},
 		{
+			"name": "Request - Update request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6,\r\n    \"active\": true,\r\n    \"created\": \"2021-12-04T20:04:38.218+0000\",\r\n    \"createdBy\": 2,\r\n    \"updated\": \"2021-12-04T20:04:38.218+0000\",\r\n    \"updatedBy\": 2,\r\n    \"workspace\": {\r\n        \"id\": 1\r\n    },\r\n    \"requestType\": \"GET\",\r\n    \"scheduledType\": \"MIN1\",\r\n    \"protocol\": \"HTTPS\",\r\n    \"name\": \"test55\",\r\n    \"url\": \"142.250.184.142\",\r\n    \"port\": \"443\",\r\n    \"body\": null,\r\n    \"tryCount\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5055/request-tracker/request/save",
+					"host": [
+						"localhost"
+					],
+					"port": "5055",
+					"path": [
+						"request-tracker",
+						"request",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Request - List request",
 			"request": {
 				"method": "GET",
@@ -309,80 +324,20 @@
 			"response": []
 		},
 		{
-			"name": "Parameter - List scheduled type",
+			"name": "Menu - List menu",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/scheduled-type",
+					"raw": "localhost:5055/request-tracker/menu/list",
 					"host": [
 						"localhost"
 					],
 					"port": "5055",
 					"path": [
 						"request-tracker",
-						"parameter",
-						"scheduled-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Parameter - List reqeust type",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/request-type",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"request-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Parameter - List response type",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/response-type",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"response-type"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Test",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:5055/request-tracker/parameter/request",
-					"host": [
-						"localhost"
-					],
-					"port": "5055",
-					"path": [
-						"request-tracker",
-						"parameter",
-						"request"
+						"menu",
+						"list"
 					]
 				}
 			},

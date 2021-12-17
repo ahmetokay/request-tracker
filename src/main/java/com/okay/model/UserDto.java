@@ -10,6 +10,8 @@ public class UserDto extends BaseModel {
 
     private String email;
 
+    private String password;
+
     private String name;
 
     private String surname;

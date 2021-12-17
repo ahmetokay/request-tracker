@@ -14,9 +14,9 @@ public abstract class BaseModel implements Serializable {
 
     private Date created;
 
-    private Integer createdBy;
+    private Long createdBy;
 
     private Date updated;
 
-    private Integer updatedBy;
+    private Long updatedBy;
 }

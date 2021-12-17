@@ -1,6 +1,6 @@
 package com.okay.config;
 
-import com.okay.model.UserDto;
+import com.okay.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,10 +8,10 @@ import java.util.Collection;
 
 public class UserPrincipal implements UserDetails {
 
-    private final UserDto user;
+    private final User user;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(UserDto user, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(User user, Collection<? extends GrantedAuthority> authorities) {
         this.user = user;
         this.authorities = authorities;
     }
@@ -23,13 +23,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-//        return user.getPassword();
-        return user.getEmail();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getUsername();
     }
 
     @Override
@@ -49,10 +48,10 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return user.getActive();
     }
 
-    public UserDto getUser() {
+    public User getUser() {
         return user;
     }
 }

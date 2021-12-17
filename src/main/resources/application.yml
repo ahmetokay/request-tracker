@@ -28,3 +28,8 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
+  session:
+    servlet:
+      filter-order: 3
+  jackson:
+    default-property-inclusion: NON_NULL
