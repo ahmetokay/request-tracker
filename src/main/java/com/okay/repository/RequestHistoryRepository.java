@@ -11,4 +11,6 @@ import java.util.List;
 public interface RequestHistoryRepository extends BaseRepository<RequestHistory> {
 
     List<RequestHistory> findByRequestId(Long requestId);
+
+    int deleteAllByRequest(Request request);
 }

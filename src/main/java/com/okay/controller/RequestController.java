@@ -1,11 +1,9 @@
 package com.okay.controller;
 
-import com.okay.constant.RoleConstants;
 import com.okay.model.RequestDto;
 import com.okay.service.RequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +29,12 @@ public class RequestController {
     @PostMapping(value = "/update")
     public ResponseEntity<RequestDto> update(@RequestBody RequestDto request) {
         return new ResponseEntity<>(service.update(request), HttpStatus.OK);
+    }
+
+    @PreAuthorize(value = "hasAuthority(T(com.okay.constant.RoleConstants).ROLE_USER)")
+    @PostMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody RequestDto request) {
+        return new ResponseEntity<>(service.delete(request), HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasAuthority(T(com.okay.constant.RoleConstants).ROLE_USER)")
