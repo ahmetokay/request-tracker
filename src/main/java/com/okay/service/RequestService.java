@@ -11,6 +11,8 @@ public interface RequestService {
 
     RequestDto update(RequestDto request);
 
+    boolean delete(RequestDto request);
+
     RequestDto get(long id);
 
     List<RequestDto> list();
