@@ -75,7 +75,7 @@ public class RequestUtils {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-//                requestHistory.setBody(response.toString());
+                requestHistory.setBody(response.toString());
             }
         } catch (Exception e) {
             error = true;
