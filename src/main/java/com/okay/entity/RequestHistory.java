@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "rt_request_history")
 public class RequestHistory extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_request_id")
     private Request request;
 

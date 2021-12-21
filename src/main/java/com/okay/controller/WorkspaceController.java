@@ -1,5 +1,6 @@
 package com.okay.controller;
 
+import com.okay.model.RequestDto;
 import com.okay.model.WorkspaceDto;
 import com.okay.service.WorkspaceService;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,12 @@ public class WorkspaceController {
     @PostMapping(value = "/update")
     public ResponseEntity<WorkspaceDto> update(@RequestBody WorkspaceDto workspace) {
         return new ResponseEntity<>(service.update(workspace), HttpStatus.OK);
+    }
+
+    @PreAuthorize(value = "hasAuthority(T(com.okay.constant.RoleConstants).ROLE_USER)")
+    @PostMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody WorkspaceDto workspace) {
+        return new ResponseEntity<>(service.delete(workspace), HttpStatus.OK);
     }
 
     @PreAuthorize(value = "hasAuthority(T(com.okay.constant.RoleConstants).ROLE_USER)")

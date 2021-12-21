@@ -15,4 +15,6 @@ public interface UserService {
     UserDto get(long id);
 
     List<UserDto> list();
+
+    UserDto getCurrentUser();
 }

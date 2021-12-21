@@ -4,13 +4,11 @@ import com.okay.enm.EnumRequestType;
 import com.okay.model.RequestDto;
 import com.okay.model.RequestHistoryDto;
 import com.okay.service.RequestHistoryService;
-import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -77,7 +75,7 @@ public class RequestUtils {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                requestHistory.setBody(response.toString());
+//                requestHistory.setBody(response.toString());
             }
         } catch (Exception e) {
             error = true;

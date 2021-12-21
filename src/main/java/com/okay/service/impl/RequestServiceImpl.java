@@ -4,7 +4,6 @@ import com.okay.converter.RequestConverter;
 import com.okay.enm.EnumScheduledType;
 import com.okay.entity.Request;
 import com.okay.model.RequestDto;
-import com.okay.repository.RequestHistoryRepository;
 import com.okay.repository.RequestRepository;
 import com.okay.service.RequestService;
 import org.springframework.stereotype.Component;
@@ -17,13 +16,10 @@ public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository repository;
 
-    private final RequestHistoryRepository requestHistoryRepository;
-
     private final RequestConverter converter;
 
-    public RequestServiceImpl(RequestRepository repository, RequestHistoryRepository requestHistoryRepository, RequestConverter converter) {
+    public RequestServiceImpl(RequestRepository repository, RequestConverter converter) {
         this.repository = repository;
-        this.requestHistoryRepository = requestHistoryRepository;
         this.converter = converter;
     }
 
@@ -41,7 +37,6 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public boolean delete(RequestDto request) {
         Request requestEntity = converter.convertToEntity(request);
-        requestHistoryRepository.deleteAllByRequest(requestEntity);
         repository.delete(requestEntity);
         return true;
     }

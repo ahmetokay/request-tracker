@@ -7,6 +7,7 @@ import com.okay.enm.EnumScheduledType;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -43,4 +44,7 @@ public class Request extends BaseEntity {
 
     @Column(name = "try_count")
     private Integer tryCount;
+
+    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
+    private List<RequestHistory> requestHistoryList;
 }

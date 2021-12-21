@@ -6,6 +6,7 @@ import com.okay.repository.RequestHistoryRepository;
 import com.okay.service.RequestHistoryService;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -20,6 +21,7 @@ public class RequestHistoryServiceImpl implements RequestHistoryService {
         this.converter = converter;
     }
 
+    @Transactional
     @Override
     public RequestHistoryDto save(RequestHistoryDto requestHistory) {
         return converter.convertToDto(repository.save(converter.convertToEntity(requestHistory)));

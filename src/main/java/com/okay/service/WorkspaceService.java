@@ -10,6 +10,8 @@ public interface WorkspaceService {
 
     WorkspaceDto update(WorkspaceDto workspace);
 
+    boolean delete(WorkspaceDto workspace);
+
     WorkspaceDto get(long id);
 
     List<WorkspaceDto> list();

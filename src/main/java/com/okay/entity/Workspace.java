@@ -14,8 +14,7 @@ public class Workspace extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-
-    @OneToMany(mappedBy = "workspace")
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Request> requestList;
 
     @ManyToOne(fetch = FetchType.LAZY)
